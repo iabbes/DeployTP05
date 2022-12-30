@@ -71,13 +71,11 @@ $app->post('/api/getLogin', function (Request $request, Response $response, $arg
 
     if (empty($login) || empty($password)) {
         $logged=true;
-        echo "Login ou mot de passe vide";
     }
  
     if (!$logged) {
         $response = createJwT($response);
         $response->getBody()->write(json_encode(array('login' => $login)));
-        echo "Logged";
     }
     else{          
         $response = $response->withStatus(401);
