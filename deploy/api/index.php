@@ -70,10 +70,11 @@ $app->post('/api/getLogin', function (Request $request, Response $response, $arg
     $password = $body['mdp'] ?? "";
 
     if (empty($login) || empty($password)) {
-        $logged=true;
+        $logged=false;
+        echo "Login ou mot de passe vide";
     }
  
-    if (!$logged) {
+    if ($logged) {
         $response = createJwT($response);
         $response->getBody()->write(json_encode(array('login' => $login)));
     }
