@@ -77,6 +77,7 @@ $app->post('/api/getLogin', function (Request $request, Response $response, $arg
     if (!$logged) {
         $response = createJwT($response);
         $response->getBody()->write(json_encode(array('login' => $login)));
+        echo "Logged";
     }
     else{          
         $response = $response->withStatus(401);
