@@ -79,7 +79,7 @@ function  addHeaders (Response $response) : Response {
 
 $app->get('/api/planes/getAll', function (Request $request, Response $response, $args) {
     global $entityManager;
-    $products = $entityManager->getRepository('avion')->findAll();
+    $products = $entityManager->getRepository('Avion')->findAll();
     $response = addHeaders($response);
     $response->getBody()->write(json_encode ($products));
     return $response;
