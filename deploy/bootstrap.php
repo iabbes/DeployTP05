@@ -6,11 +6,11 @@ require_once "vendor/autoload.php";
 $isDevMode = true;
 $config = Setup::createYAMLMetadataConfiguration(array(__DIR__ . "/config/yaml"), $isDevMode);
 $conn = array(
-'host' => 'dpg-cdr3h51gp3jnj84cbjag-a',
+'host' => 'dpg-ceu0vdha6gdut0r00pl0-a',
 'driver' => 'pdo_pgsql',
-'user' => 'tp05_web_cnam_user',
-'password' => 'S6MCVRGsBs0mro4gQqXNOUdY2htJPlLC',
-'dbname' => 'tp05_web_cnam',
+'user' => 'projetwebcnam_user',
+'password' => 'rflXMO4LctNLZVwSZM9qEYlk7uVex9OS',
+'dbname' => 'projetwebcnam',
 'port' => '5432'
 );
 $entityManager = EntityManager::create($conn, $config);
