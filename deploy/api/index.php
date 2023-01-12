@@ -1,4 +1,8 @@
 <?php
+
+require_once __DIR__ . '/models/Client.php';
+require_once __DIR__ . '/models/Avion.php';
+
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -56,9 +60,28 @@ function createJWT(Response $response): Response{
     return $response;
 }
 
+function  addHeaders (Response $response) : Response {
+    $response = $response
+    ->withHeader("Content-Type", "application/json")
+    ->withHeader('Access-Control-Allow-Origin', '*')
+    ->withHeader('Access-Control-Allow-Headers', 'Content-Type,  Authorization')
+    ->withHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, OPTIONS')
+    ->withHeader('Access-Control-Expose-Headers', 'Authorization');
+
+    return $response;
+}
+
+// $app->get('/api/planes/getAll', function (Request $request, Response $response, $args) {
+//     $inputJSON = file_get_contents('./mockup/catalogue.json');
+//     $response->getBody()->write($inputJSON);
+//     return $response;
+// });
+
 $app->get('/api/planes/getAll', function (Request $request, Response $response, $args) {
-    $inputJSON = file_get_contents('./mockup/catalogue.json');
-    $response->getBody()->write($inputJSON);
+    global $entityManager;
+    $products = $entityManager->getRepository('avion')->findAll();
+    $response = addHeaders($response);
+    $response->getBody()->write(json_encode ($products));
     return $response;
 });
 
