@@ -92,7 +92,7 @@ $app->get('/api/clients/getAll', function (Request $request, Response $response,
     return $response;
 });
 
-$app->get('/api/clients/getAll/{id}', function (Request $request, Response $response, $args) {
+$app->get('/api/clients/{id}', function (Request $request, Response $response, $args) {
     global $entityManager;
     $client = $entityManager->getRepository('client')->findOneBy(array('id' => $args['id']));
     $response = addHeaders($response);
@@ -132,7 +132,7 @@ $options = [
     "algorithm" => ["HS256"],
     "secret" => JWT_SECRET,
     "path" => ["/api"],
-    "ignore" => ["/api/planes/getAll","/api/getLogin","/api/clients/getAll"],
+    "ignore" => ["/api/planes/getAll","/api/getLogin","/api/clients/getAll", "/api/clients/{id}"],
     "error" => function ($response, $arguments) {
         $data = array('ERREUR' => 'Connexion', 'ERREUR' => 'JWT Non valide');
         $response = $response->withStatus(401);
