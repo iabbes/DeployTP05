@@ -1,5 +1,6 @@
 <?php
 class Client{
+    public $id;
     public $nom;
     public $prenom;
     public $adresse;
@@ -11,6 +12,9 @@ class Client{
     public $login;
     public $password;
 
+    public function setId($id){
+        $this->id = $id;
+    }
     public function setNom($nom){
         $this->nom = $nom;
     }
@@ -41,5 +45,5 @@ class Client{
     public function setPassword($password){
         $this->password = $password;
     }
-    
+
 }
