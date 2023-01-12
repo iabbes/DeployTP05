@@ -1,7 +1,7 @@
 <?php
 
-require_once __DIR__ . '/models/Client.php';
-require_once __DIR__ . '/models/Avion.php';
+require_once __DIR__ . '/models/client.php';
+require_once __DIR__ . '/models/avion.php';
 
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
