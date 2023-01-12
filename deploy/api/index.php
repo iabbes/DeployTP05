@@ -86,9 +86,17 @@ $app->get('/api/planes/getAll', function (Request $request, Response $response, 
 
 $app->get('/api/clients/getAll', function (Request $request, Response $response, $args) {
     global $entityManager;
-    $products = $entityManager->getRepository('client')->findAll();
+    $clients = $entityManager->getRepository('client')->findAll();
     $response = addHeaders($response);
-    $response->getBody()->write(json_encode ($products));
+    $response->getBody()->write(json_encode ($clients));
+    return $response;
+});
+
+$app->get('/api/clients/getAll/{id}', function (Request $request, Response $response, $args) {
+    global $entityManager;
+    $client = $entityManager->getRepository('client')->findOneBy(array('id' => $args['id']));
+    $response = addHeaders($response);
+    $response->getBody()->write(json_encode ($client));
     return $response;
 });
 
