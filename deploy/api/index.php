@@ -9,6 +9,11 @@ require_once DIR . '/../bootstrap.php';
 require_once __DIR__ . '/models/client.php';
 require_once __DIR__ . '/models/avion.php';
 
+ 
+const JWT_SECRET = "makey1234567";
+
+$app = AppFactory::create();
+
 // Allow from any origin
 if (isset($_SERVER['HTTP_ORIGIN'])) {
     // Decide if the origin in $_SERVER['HTTP_ORIGIN'] is one
@@ -31,19 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 
     exit(0);
 }
-
-
-
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
-use Slim\Factory\AppFactory;
-use Tuupola\Middleware\HttpBasicAuthentication;
-use \Firebase\JWT\JWT;
-require __DIR__ . '/../vendor/autoload.php';
- 
-const JWT_SECRET = "makey1234567";
-
-$app = AppFactory::create();
 
 function createJWT(Response $response): Response{
     $issuedAt   = new DateTimeImmutable();
