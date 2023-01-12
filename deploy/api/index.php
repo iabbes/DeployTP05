@@ -84,6 +84,14 @@ $app->get('/api/planes/getAll', function (Request $request, Response $response, 
     return $response;
 });
 
+$app->get('/api/clients/getAll', function (Request $request, Response $response, $args) {
+    global $entityManager;
+    $products = $entityManager->getRepository('client')->findAll();
+    $response = addHeaders($response);
+    $response->getBody()->write(json_encode ($products));
+    return $response;
+});
+
 $app->post('/api/getLogin', function (Request $request, Response $response, $args) {
     $logged=false;
     $inputJSON = file_get_contents('php://input');
@@ -116,7 +124,7 @@ $options = [
     "algorithm" => ["HS256"],
     "secret" => JWT_SECRET,
     "path" => ["/api"],
-    "ignore" => ["/api/planes/getAll","/api/getLogin"],
+    "ignore" => ["/api/planes/getAll","/api/getLogin","/api/clients/getAll"],
     "error" => function ($response, $arguments) {
         $data = array('ERREUR' => 'Connexion', 'ERREUR' => 'JWT Non valide');
         $response = $response->withStatus(401);
